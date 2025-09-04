@@ -17,7 +17,7 @@ class LoginScene(Scene):
 
         cx, cy = self.screen.get_width()//2, self.screen.get_height()//2
         self.txt_user = TextBox((cx-170, cy-80), (340,44), font=self.font24, placeholder="Username")
-        self.txt_pass = TextBox((cx-170, cy-20), (340,44), font=self.font24, placeholder="Password", password=True)
+        self.txt_pass = TextBox((cx-170, cy), (340,44), font=self.font24, placeholder="Password", password=True)
 
         def do_login():
             name = self.txt_user.get_text().strip() or "Guest"
@@ -25,7 +25,7 @@ class LoginScene(Scene):
             self.state.save()
             self.app['scenes'].switch(self.app['MainScene'], with_fade=True, username=name)
 
-        self.btn_login = Button("Login", (cx-75, cy+40), (150,48), font=self.font24, on_click=do_login)
+        self.btn_login = Button("Login", (cx-75, cy+80), (150,48), font=self.font24, on_click=do_login)
         self.btn_login.set_colors(
             default=bc["default"], hover=bc["hover"], active=bc["active"], disabled=bc["disabled"]
         )
@@ -46,7 +46,7 @@ class LoginScene(Scene):
 
         label_u = self.font24.render("Username", True, self.TEXT)
         label_p = self.font24.render("Password", True, self.TEXT)
-        screen.blit(label_u, (self.txt_user.rect.x, self.txt_user.rect.y - 26))
-        screen.blit(label_p, (self.txt_pass.rect.x, self.txt_pass.rect.y - 26))
+        screen.blit(label_u, (self.txt_user.rect.x, self.txt_user.rect.y - 32))
+        screen.blit(label_p, (self.txt_pass.rect.x, self.txt_pass.rect.y - 32))
 
         self.txt_user.draw(screen); self.txt_pass.draw(screen); self.btn_login.draw(screen)

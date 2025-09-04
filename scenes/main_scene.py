@@ -228,12 +228,7 @@ class MainScene(Scene):
         # (name, category, desc, scene_key)
         all_feats = [
             ("YouTube Downloader", "Assets", "Download audio/video from a YouTube URL.", "YTDownloadScene"),
-            ("Directory Visualizer", "Assets",    "Draw your project tree as UML-like boxes.", "DirectoryVisualizerScene"),
-            ("Asset Organizer",      "Assets",    "Find duplicates and sort assets into folders.", "AssetOrganizerScene"),
-            ("Text/Font Manager",    "Text",      "Apply font/size/alignment across the UI.", "TextFontManagerScene"),
-            ("Audio Player",         "Audio",     "Playlists and copy selected tracks to groups.", "AudioPlayerScene"),
-            ("Scene Template",       "Templates", "Generate base scene template files.", "SceneTemplateScene"),
-        ]
+            ]
         if self.state.recent:
             recent_feats = [(name, "Recent", f"Recently opened: {name}", None) for name in self.state.recent]
         else:
