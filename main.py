@@ -80,7 +80,7 @@ def main():
     app["scenes"].add(app["DirectoryVisualizerScene"])
     app["scenes"].add(app["YTDownloadScene"])
     # 첫 화면
-    app["scenes"].switch(app["LoginScene"], with_fade=False)
+    app["scenes"].switch(app["YTDownloadScene"], with_fade=False)
 
     # 필요시 페이드 시간 조절
     app["scenes"].set_fade(0.5)

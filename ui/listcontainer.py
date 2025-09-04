@@ -130,13 +130,19 @@ class ListContainer:
 
         # 자식 업데이트(스크롤 보정: y를 일시적으로 이동)
         dy = -self._scroll_y
-        for wdg in self.widgets:
-            if hasattr(wdg, "rect"):
-                wdg.rect.move_ip(0, dy)
-            if hasattr(wdg, "update"):
-                wdg.update(events)
-            if hasattr(wdg, "rect"):
-                wdg.rect.move_ip(0, -dy)
+        for w in self.widgets:
+            if hasattr(w, "offset"):
+                w.offset(dy)
+                if hasattr(w, "update"):
+                    w.update(events)
+                w.offset(-dy)
+            else:
+                if hasattr(w, "rect"):
+                    w.rect.move_ip(0, dy)
+                if hasattr(w, "update"):
+                    w.update(events)
+                if hasattr(w, "rect"):
+                    w.rect.move_ip(0, -dy)
 
     def draw(self, surface):
         # 배경/외곽
@@ -151,14 +157,20 @@ class ListContainer:
 
         # 자식 그리기(스크롤 보정)
         dy = -self._scroll_y
-        for wdg in self.widgets:
-            if hasattr(wdg, "rect"):
-                wdg.rect.move_ip(0, dy)
-            if hasattr(wdg, "draw"):
-                wdg.draw(surface)
-            if hasattr(wdg, "rect"):
-                wdg.rect.move_ip(0, -dy)
-
+        for w in self.widgets:
+            if hasattr(w, "offset"):
+                w.offset(dy)
+                if hasattr(w, "draw"):
+                    w.draw(surface)
+                w.offset(-dy)
+            else:
+                if hasattr(w, "rect"):
+                    w.rect.move_ip(0, dy)
+                if hasattr(w, "draw"):
+                    w.draw(surface)
+                if hasattr(w, "rect"):
+                    w.rect.move_ip(0, -dy)
+        
         # 스크롤바
         if self._scroll_enabled and self._content_h > (self.rect.height - self.padding[1]*2):
             self._draw_scrollbar(surface)

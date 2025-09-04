@@ -228,7 +228,7 @@ class MainScene(Scene):
         # (name, category, desc, scene_key)
         all_feats = [
             ("YouTube Downloader", "Assets", "Download audio/video from a YouTube URL.", "YTDownloadScene"),
-            ]
+        ]
         if self.state.recent:
             recent_feats = [(name, "Recent", f"Recently opened: {name}", None) for name in self.state.recent]
         else:
