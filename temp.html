@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Portfolio Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-6">
+
+  <!-- 헤더 -->
+  <header class="w-full max-w-6xl flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">📂 My Dev Portfolio</h1>
+    <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700">Contact</button>
+  </header>
+
+  <!-- 메인 대시보드 -->
+  <main class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl">
+
+    <!-- UNITY -->
+    <section class="bg-white rounded-2xl shadow p-5 border-t-4 border-indigo-500">
+      <h2 class="text-xl font-semibold mb-4">🎮 Unity</h2>
+      <div class="grid grid-cols-1 gap-4">
+        <div class="p-4 bg-indigo-50 rounded-xl shadow hover:shadow-lg cursor-pointer">
+          <h3 class="font-bold">LMS_Unity 프로젝트</h3>
+          <p class="text-sm text-gray-600">학습 관리 시스템 + FPS Defense</p>
+        </div>
+        <div class="p-4 bg-indigo-50 rounded-xl shadow hover:shadow-lg cursor-pointer">
+          <h3 class="font-bold">테스트 용 게임</h3>
+          <p class="text-sm text-gray-600">아이디어 실험 공간</p>
+        </div>
+        <div class="p-4 bg-indigo-50 rounded-xl shadow hover:shadow-lg cursor-pointer">
+          <h3 class="font-bold">Udemy 강의 코드 예제 모음</h3>
+          <p class="text-sm text-gray-600">커스터마이징된 강의 실습 코드</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PYTHON -->
+    <section class="bg-white rounded-2xl shadow p-5 border-t-4 border-green-500">
+      <h2 class="text-xl font-semibold mb-4">🐍 Development Tool - Pygame</h2>
+      <div class="grid grid-cols-1 gap-4">
+        <div class="p-4 bg-green-50 rounded-xl shadow hover:shadow-lg cursor-pointer">
+          <h3 class="font-bold">LMS_Python 프로젝트</h3>
+          <p class="text-sm text-gray-600">게임 개발 도우미 툴</p>
+        </div>
+        <div class="p-4 bg-green-50 rounded-xl shadow hover:shadow-lg cursor-pointer">
+          <h3 class="font-bold">개발 툴 리스트</h3>
+          <p class="text-sm text-gray-600">파일 관리, 음악 툴, 스크립트 등</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 기타 툴 -->
+    <section class="bg-white rounded-2xl shadow p-5 border-t-4 border-purple-500 md:col-span-2">
+      <h2 class="text-xl font-semibold mb-4">🛠️ 기타 툴</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="p-4 bg-purple-50 rounded-xl shadow hover:shadow-lg cursor-pointer">
+          <h3 class="font-bold">ConfyUI</h3>
+          <p class="text-sm text-gray-600">UI 기반 워크플로우 툴</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
