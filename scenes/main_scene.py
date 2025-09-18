@@ -6,7 +6,7 @@ from ui.labelbox import LabelBox
 from ui.tabbar import TabBar
 from core.theme import get_colors
 
-ASSET_DIR = "assets"
+ASSET_DIR = "assets/images"
 
 # ---------- utils ----------
 def safe_load(path: str, alpha: bool = True):
@@ -114,8 +114,9 @@ class MainScene(Scene):
         W, H = self.screen.get_size()
 
         # background
-        bg_path = os.path.join(ASSET_DIR, "background.png")
-        self.bg_img = safe_load(bg_path, alpha=False)
+
+        self.bg_img = self.app["assets"].get_image("background")
+
         if self.bg_img:
             self.bg_img = pygame.transform.smoothscale(self.bg_img, (W, H))
 
@@ -228,6 +229,8 @@ class MainScene(Scene):
         # (name, category, desc, scene_key)
         all_feats = [
             ("YouTube Downloader", "Assets", "Download audio/video from a YouTube URL.", "YTDownloadScene"),
+            ("Map Gen", "Assets", "Download audio/video from a YouTube URL.", "ProcGenPlaygroundScene"),
+            ("MusicManagement", "Audio", "Download audio/video from a YouTube URL.", "MusicManagerScene"),
         ]
         if self.state.recent:
             recent_feats = [(name, "Recent", f"Recently opened: {name}", None) for name in self.state.recent]

@@ -1,23 +1,27 @@
 import sys, pygame
 from core.scene_manager import SceneManager
 from core.app_state import AppState
+from core.asset_registry import AssetRegistry
 from scenes.login_scene import LoginScene
 from scenes.main_scene import MainScene
 from scenes.directory_visualizer_scene import DirectoryVisualizerScene
 from scenes.ytdownload_scene import YTDownloadScene
+from scenes.music_manager_scene import MusicManagerScene
+from scenes.ProcGenPlaygroundScene import ProcGenPlaygroundScene
+
 
 # Logical design resolution (do not change)
 LOGICAL_W, LOGICAL_H = 1280, 720
 
 def draw_overlay(surface, alpha=80):
-    """화면 전체를 살짝 어둡게(가독성↑). alpha=0~255"""
+    #"""화면 전체를 살짝 어둡게(가독성↑). alpha=0~255"""
     w, h = surface.get_size()
     mask = pygame.Surface((w, h), pygame.SRCALPHA)
     mask.fill((0, 0, 0, alpha))
     surface.blit(mask, (0, 0))
 
 def draw_vignette(surface, strength=120):
-    """모서리를 어둡게: 간단 방사형 비네트"""
+    #"""모서리를 어둡게: 간단 방사형 비네트"""
     w, h = surface.get_size()
     vign = pygame.Surface((w, h), pygame.SRCALPHA)
     # 네 귀퉁이에 점점 어두워지는 원을 겹쳐서 비네트 흉내
@@ -29,7 +33,7 @@ def draw_vignette(surface, strength=120):
 
 
 def compute_scale_to_fit(win_w, win_h):
-    """Keep aspect ratio, return scale and letterbox offsets."""
+    #"""Keep aspect ratio, return scale and letterbox offsets."""
     sx = win_w / LOGICAL_W
     sy = win_h / LOGICAL_H
     s = min(sx, sy)
@@ -40,7 +44,7 @@ def compute_scale_to_fit(win_w, win_h):
     return s, off_x, off_y, draw_w, draw_h
 
 def make_display(state: AppState):
-    """Create window according to resizable + ui_scale."""
+    #"""Create window according to resizable + ui_scale."""
     base_w = int(LOGICAL_W * state.ui_scale)
     base_h = int(LOGICAL_H * state.ui_scale)
     flags = 0
@@ -67,20 +71,36 @@ def main():
     # app context, scenes
     app = {'screen': logical_surface, 'scenes': scenes, 'state': state, 'running': True}
 
+    assets = AssetRegistry(
+    base_dir="assets",
+    image_dir="images",
+    audio_dir="audio",
+    recursive=True,     # 하위 폴더까지
+    key_mode="stem",    # 파일명(확장자 제거)으로 접근. 중복시 자동으로 '폴더/파일명'이 키가 됨.
+    )
+    assets.preload()
+
+    # 전역 세팅
+    app["assets"] = assets
+
     # 씬 등록
     app["MainScene"] = MainScene(app)
     app["LoginScene"] = LoginScene(app)
     app["DirectoryVisualizerScene"] = DirectoryVisualizerScene(app)  # ← 추가!
     app["YTDownloadScene"] = YTDownloadScene(app)
-
+    app["MusicManagerScene"] = MusicManagerScene(app)
+    app["ProcGenPlaygroundScene"] = ProcGenPlaygroundScene(app)
 
     # 초기화
     app["scenes"].add(app["MainScene"])
     app["scenes"].add(app["LoginScene"])
     app["scenes"].add(app["DirectoryVisualizerScene"])
     app["scenes"].add(app["YTDownloadScene"])
+    app["scenes"].add(app["MusicManagerScene"])
+    app["scenes"].add(app["ProcGenPlaygroundScene"])
+
     # 첫 화면
-    app["scenes"].switch(app["YTDownloadScene"], with_fade=False)
+    app["scenes"].switch(app["MainScene"], with_fade=False)
 
     # 필요시 페이드 시간 조절
     app["scenes"].set_fade(0.5)

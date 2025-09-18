@@ -2,12 +2,9 @@
   "username": "Guest",
   "theme": "dark",
   "recent": [
-    "YouTube Downloader",
-    "Scene Template",
-    "Text/Font Manager",
-    "Directory Visualizer",
-    "Asset Organizer",
-    "Audio Player"
+    "Map Gen",
+    "MusicManagement",
+    "YouTube Downloader"
   ],
   "resizable": false,
   "ui_scale": 1.0
